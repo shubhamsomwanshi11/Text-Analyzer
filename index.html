@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <h1 class="title has-text-centered pt-5" id="h1">Text Analyzer</h1>
+    <div class="container box">
+        <div class="columns mb-0 p-0">
+            <div class="column ">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Characters</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="characters">0</p>
+            </div>
+            <div class="column ">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Words</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="words">0</p>
+            </div>
+            <div class="column ">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Sentences</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="sentences">0</p>
+            </div>
+            <div class="column ">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Paragraphs</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="paragraphs">0</p>
+            </div>
+            <div class="column ">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Pages</h3>
+                <div class="columns">
+                    <div class="column is-flex is-align-items-center is-justify-content-center">
+                        <div class="select is-small">
+                            <select name="" id="pagetype">
+                                <option value="A4">A4</option>
+                                <option value="A5">A5</option>
+                                <option value="Letter">Letter</option>
+                                <option value="Legal">Legal</option>
+                                <option value="A3">A3</option>
+                                <option value="A6">A6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="column has-text-left">
+                        <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="pages">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <hr> -->
+
+        <div class="has-text-right">
+            <button id="sample" class="button is-ghost">Sample</button>
+            <button class="button is-ghost has-text-danger has-text-weight-bold" id="clear">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 -960 960 960" width="22">
+                    <path
+                        d="M360-200q-22 0-40-11.5T289-241L120-480l169-239q13-18 31-29.5t40-11.5h420q24.75 0 42.375 17.625T840-700v440q0 24.75-17.625 42.375T780-200H360Zm420-60v-440 440Zm-431 0h431v-440H349L195-480l154 220Zm99-66 112-112 112 112 43-43-113-111 111-111-43-43-110 112-112-112-43 43 113 111-113 111 43 43Z"
+                        fill="red" />
+                </svg>Clear</button>
+        </div>
+        <textarea placeholder="Start typing or paste text to analyze.." id="inputText" class="textarea is-info" cols="30" rows="10"></textarea>
+
+
+        <div class="columns  mt-3 p-0">
+            <div class="column is-4">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Reading Level</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="reading-level">0 Minute
+                </p>
+            </div>
+            <div class="column is-4">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Reading Time</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="reading-time">0 Minute</p>
+            </div>
+            <div class="column is-4">
+                <h3 class="has-text-grey is-size-5 has-text-centered">Speaking Time</h3>
+                <p class="has-text-weight-bold has-text-centered is-size-3 has-text-link" id="speaking-time">-</p>
+            </div>
+        </div>
+        <hr /   >
+        <table class="table has-text-centered is-bordered is-size-5 is-fullwidth is-striped">
+            <thead class="has-text-centered">
+                <tr>
+                    <th class="has-text-centered">Name</th>
+                    <th class="has-text-centered">Min / Max</th>
+                    <th class="has-text-centered">Limit</th>
+                    <th class="has-text-centered">Type</th>
+                    <th class="has-text-centered">Current Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Meta Title </td>
+                    <td> Max</td>
+                    <td>55</td>
+                    <td> Letter </td>
+                    <td><span id="meta-title" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Meta Description </td>
+                    <td>Max</td>
+                    <td>160 </td>
+                    <td>Letter </td>
+                    <td><span id="meta-description" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Google Ideal Post Content</td>
+                    <td> Min </td>
+                    <td>300</td>
+                    <td> Word </td>
+                    <td><span id="google-post" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Instagram Captions/Comments </td>
+                    <td>Max</td>
+                    <td> 2200</td>
+                    <td> Letter </td>
+                    <td><span id="insta-caption" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Twitter Post</td>
+                    <td> Max</td>
+                    <td> 280</td>
+                    <td> Letter</td>
+                    <td><span id="twitter-post" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Twitter Username</td>
+                    <td> Max</td>
+                    <td> 20</td>
+                    <td> Letter</td>
+                    <td><span id="twitter-username" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Wall Post (Truncation)</td>
+                    <td> Max</td>
+                    <td> 477</td>
+                    <td> Letter</td>
+                    <td><span id="facebook-post" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Wall Post (All)</td>
+                    <td> Max</td>
+                    <td> 63206</td>
+                    <td> Letter</td>
+                    <td><span id="facebook-apost" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Comment</td>
+                    <td> Max</td>
+                    <td> 8000</td>
+                    <td> Letter</td>
+                    <td><span id="facebook-comment" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Page Description</td>
+                    <td> Max</td>
+                    <td> 255</td>
+                    <td> Letter</td>
+                    <td><span id="facebook-pdescription" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Username</td>
+                    <td> Max</td>
+                    <td> 50</td>
+                    <td> Letter</td>
+                    <td><span id="facebook-username" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Facebook Messenger Message</td>
+                    <td>Max</td>
+                    <td> 20000</td>
+                    <td>Letter</td>
+                    <td><span id="facebook-message" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>YouTube Video Title</td>
+                    <td> Max</td>
+                    <td> 70</td>
+                    <td> Letter</td>
+                    <td><span id="youtube-title" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>YouTube Video Description</td>
+                    <td> Max</td>
+                    <td> 5000</td>
+                    <td> Letter</td>
+                    <td><span id="youtube-description" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Snapchat Caption</td>
+                    <td> Max</td>
+                    <td> 250</td>
+                    <td> Letter</td>
+                    <td><span id="snapchat-caption" class="has-text-weight-bold">-</span></td>
+                </tr>
+                <tr>
+                    <td>Pinterest Pin Description</td>
+                    <td> Max</td>
+                    <td> 500</td>
+                    <td> Letter</td>
+                    <td><span id="pinterest-description" class="has-text-weight-bold">-</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
